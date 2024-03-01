@@ -84,6 +84,7 @@ def search_for_query(query, cache):
                         visited.append(ip)
                         print(";".join(visited))
                         print(query + ";" + ".".join(ip.split("-")))
+                        print()
                         cache.add_node(DNSNode.DNSNode(query, ip))
                         return True
                     else:
@@ -99,6 +100,7 @@ def search_for_query(query, cache):
             print("File not found")
     # Couldn't find the query at all starting from the root...
     print("Unresolved")
+    print()
     return False
 
 
@@ -125,10 +127,12 @@ def main():
         if cache.get_node(query) is not None:
             print("Cache")
             print(query + ";" + cache.get_node(query).ip)
+            print()
             continue
         else:
             search_for_query(query, cache)
 
+    print()
     # Print the cache
     print("Current cache:")
     cache.print()
