@@ -1,26 +1,30 @@
 # Description: A simple class that represents a DNS cache
 # Author: Israel Fernandez
+# Last Modified: 3/1/2024
+
 
 # Found from https://realpython.com/python-ordereddict/
 from collections import OrderedDict
 
 # Class that represents a DNS cache
 class DNSCache:
+    # Constants
+    CACHE_MAX_SIZE = 3
     # Constructor
     def __init__(self):
         self.cache = OrderedDict()
 
-    # Method to add a node to the cache
+    # Method to add a DNS node to the cache
     def add_node(self, node):
-        if len(self.cache) >= 3:
+        if len(self.cache) >= self.CACHE_MAX_SIZE:
             self.delete_oldest()
         self.cache[node.name] = node
 
-    # Method to remove a node from the cache
+    # Method to remove a DNS node from the cache
     def remove_node(self, name):
         del self.cache[name]
 
-    # Method to get a node from the cache
+    # Method to get a DNS node from the cache
     # if the node is found, move it to the most recent position
     def get_node(self, name):
         if name in self.cache:
