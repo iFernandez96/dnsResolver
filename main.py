@@ -1,3 +1,15 @@
+#!/usr/bin/env python3
+## This is the main file for the DNS Resolver Assignment
+# The purpose of this assignment is to create a simple DNS resolver that uses a cache.
+# The program will read a cache file and a DNS Queries file and resolve the queries.
+# If a query is found in the cache, it will be printed. If not, the program will search for it in the DNS tree.
+# If the query is found in the DNS tree, it will be printed and added to the cache.
+# If the query is not found in the DNS tree, "Unresolved" will be printed.
+
+# @Author: Israel Fernnadez
+# @Last Modified: 3/1/2024
+# @Version: 1.0
+
 import DNSNode
 import DNSCache
 
