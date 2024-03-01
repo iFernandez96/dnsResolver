@@ -2,6 +2,19 @@ DNS Resolver Assignment
 Overview
 
 This Python script serves as a DNS resolver that leverages caching to efficiently resolve DNS queries. It processes queries from a specified DNS Queries file and checks against entries in a cache file. Queries resolved from the cache are printed immediately, while others are looked up in the DNS tree. Resolved queries are added to the cache; unresolved ones are marked as such.
+
+DNS Tree Formatting
+
+This DNS resolver navigates a simulated DNS hierarchy to resolve queries. The hierarchy is structured as follows:
+
+    Root DNS Server: The top-level server in the DNS hierarchy (1-0-0-0.txt). It directs queries to the appropriate Top-Level Domain (TLD) server.
+    TLD Server: Handles queries for domains within a specific top-level domain (.com, .edu, etc.).
+    Authoritative Name Server: Provides the final IP address mapping for a specific domain.
+
+Each server in the hierarchy is represented by a text file, named after the server's IP address, with entries formatted as domain;IP_address. For example, the root server might direct to a TLD server with com;15-25-72-200, indicating the .com TLD server is at IP 15.25.72.200. The resolver follows this format to dynamically navigate the DNS tree, resolving queries iteratively from the root to the authoritative server.
+
+This approach simulates real DNS resolution within the constraints of this assignment, providing a practical understanding of DNS operations.
+
 Key Features
 
     Efficient DNS query resolution with caching.
@@ -32,9 +45,6 @@ File Descriptions
     <cache-entries.txt>: Text file containing initial cache entries.
     <dns-queries.txt>: Text file with DNS queries to resolve.
 
-How It Works
-
-The script starts by reading the cache file and queries file. It then attempts to resolve each query, first checking the cache and, if not found, searching through the DNS tree. Successfully resolved queries are printed and added to the cache. The script ends by printing the final state of the cache.
 Author
 
     Israel Fernandez
