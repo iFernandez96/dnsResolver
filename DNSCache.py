@@ -1,6 +1,6 @@
-# Description: A simple class that represents a DNS cache
-# Author: Israel Fernandez
-# Last Modified: 3/1/2024
+# @Description: A simple class that represents a DNS cache
+# @Author: Israel Fernandez
+# @Last Modified: 3/1/2024
 
 
 # Found from https://realpython.com/python-ordereddict/
