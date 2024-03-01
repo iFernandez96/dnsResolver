@@ -82,7 +82,7 @@ def search_for_query(query, cache):
                     if name == query:
                         # We found the query!
                         visited.append(ip)
-                        print(visited)
+                        print(";".join(visited))
                         print(query + ";" + ".".join(ip.split("-")))
                         cache.add_node(DNSNode.DNSNode(query, ip))
                         return True
