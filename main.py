@@ -6,7 +6,7 @@
 # If the query is found in the DNS tree, it will be printed and added to the cache.
 # If the query is not found in the DNS tree, "Unresolved" will be printed.
 
-# @Author: Israel Fernnadez
+# @Author: Israel Fernanadez
 # @Last Modified: 3/1/2024
 # @Version: 1.0
 
