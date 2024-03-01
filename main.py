@@ -19,7 +19,6 @@ import argparse
 from collections import deque
 
 
-
 ## This function will read the cache file and return a DNS cache
 # @param filename: The name of the file to read
 # @return: A DNS cache
