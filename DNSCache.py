@@ -11,25 +11,25 @@ class DNSCache:
         self.cache = OrderedDict()
 
     # Method to add a node to the cache
-    def addNode(self, node):
+    def add_node(self, node):
         if len(self.cache) >= 3:
-            self.deleteOldest()
+            self.delete_oldest()
         self.cache[node.name] = node
 
     # Method to remove a node from the cache
-    def removeNode(self, name):
+    def remove_node(self, name):
         del self.cache[name]
 
     # Method to get a node from the cache
     # if the node is found, move it to the most recent position
-    def getNode(self, name):
+    def get_node(self, name):
         if name in self.cache:
             self.cache.move_to_end(name)
             return self.cache[name]
         return None
 
     # Method to delete the oldest node in the cache
-    def deleteOldest(self):
+    def delete_oldest(self):
           self.cache.popitem(last=False)
 
     # Method to print the cache

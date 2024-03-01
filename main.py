@@ -5,41 +5,43 @@ import DNSCache
 import argparse
 # from https://www.geeksforgeeks.org/deque-in-python/
 from collections import deque
-def readCacheFile(filename):
+
+
+def read_cache_file(filename):
     # Create the cache
-    cache = DNSCache.DNSCache()
+    c = DNSCache.DNSCache()
     try:
         with open(filename, 'r') as file:
             for line in file:
                 name, ip = line.strip().split(";")
-                node = DNSNode.DNSNode(name, ip)
-                cache.addNode(node)
+                c.add_node(DNSNode.DNSNode(name, ip))
     except FileNotFoundError:
         print("Cache file not found")
         exit()
-    return cache
+    return c
 
 
-def readDNSFile(filename):
-    dnsQueries = []
+def read_dns_file(filename):
+    dns_queries = []
     try:
-        with open(args.dns, 'r') as file:
+        with open(filename, 'r') as file:
             for line in file:
                 name = line.strip()
-                dnsQueries.append(name)
+                dns_queries.append(name)
     except FileNotFoundError:
         print("DNS Queries file not found")
         exit()
-    return dnsQueries
+    return dns_queries
 
-def searchForQuery(query, cache):
-    queryInParts = query.strip().split(".")
-    queryInPartsIterator = len(queryInParts) - 1
+
+def search_for_query(query, cache):
+    query_in_parts = query.strip().split(".")
+    query_in_parts_iterator = len(query_in_parts) - 1
     # Use a double ended queue to dynamically iterate through the DNS tree
-    dequeToIterare = deque(["1-0-0-0"])
+    deque_to_iterare = deque(["1-0-0-0"])
     visited = []
-    while dequeToIterare:
-        current = dequeToIterare.pop()
+    while deque_to_iterare:
+        current = deque_to_iterare.pop()
         if current in visited:
             continue
         visited.append(current)
@@ -50,12 +52,12 @@ def searchForQuery(query, cache):
                     visited.append(ip)
                     print(visited)
                     print(query + ";" + ".".join(ip.split("-")))
-                    cache.addNode(DNSNode.DNSNode(query, ip))
+                    cache.add_node(DNSNode.DNSNode(query, ip))
                     return True
                 else:
-                    if name == ".".join(queryInParts[queryInPartsIterator:]):
-                        queryInPartsIterator -= 1
-                        dequeToIterare.append(ip)
+                    if name == ".".join(query_in_parts[query_in_parts_iterator:]):
+                        query_in_parts_iterator -= 1
+                        deque_to_iterare.append(ip)
                         break
                     else:
                         continue
@@ -63,10 +65,7 @@ def searchForQuery(query, cache):
     return False
 
 
-
-
-
-if __name__ == '__main__':
+def main():
     # Setup the arguments
     args = argparse.ArgumentParser(description="DNS Resolver Assignment with Cache",
                                    usage='python3 %(prog)s [cache-entries.txt] [dns-queries.txt]')
@@ -77,26 +76,30 @@ if __name__ == '__main__':
     args = args.parse_args()
 
     # Read the cache file
-    cache = readCacheFile(args.cache)
+    cache = read_cache_file(args.cache)
 
     # Print the cache
     # cache.print()
 
     # Read the DNS Queries file
-    dnsQueries = readDNSFile(args.dns)
+    dns_queries = read_dns_file(args.dns)
 
     # Print the DNS Queries
     # print(dnsQueries)
 
-    for query in dnsQueries:
-        print("Resolving Query: ", query)
-        if cache.getNode(query) is not None:
+    for query in dns_queries:
+        print("Resolving Query: " + query.strip())
+        if cache.get_node(query) is not None:
             print("Cache")
-            print(query + ";" + cache.getNode(query).ip)
+            print(query + ";" + cache.get_node(query).ip)
             continue
         else:
-            searchForQuery(query, cache)
+            search_for_query(query, cache)
 
     # Print the cache
     print("Current cache:")
     cache.print()
+
+
+if __name__ == "__main__":
+    main()
