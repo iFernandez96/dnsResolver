@@ -25,16 +25,16 @@ from collections import deque
 # @throws FileNotFoundError: If the file is not found
 def read_cache_file(filename):
     # Create the cache
-    c = DNSCache.DNSCache()
+    new_cache = DNSCache.DNSCache()
     try:
         with open(filename, 'r') as file:
             for line in file:
                 name, ip = line.strip().split(";")
-                c.add_node(DNSNode.DNSNode(name, ip))
+                new_cache.add_node(DNSNode.DNSNode(name, ip))
     except FileNotFoundError:
         print("Cache file not found")
         exit()
-    return c
+    return new_cache
 
 
 ## This function will read the DNS Queries file and return a list of queries
