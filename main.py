@@ -108,9 +108,9 @@ def search_for_query(query, cache):
 def main():
     # Setup the arguments
     args = argparse.ArgumentParser(description="DNS Resolver Assignment with Cache",
-                                   usage='python3 %(prog)s [cache-entries.txt] [dns-queries.txt]')
-    args.add_argument("cache")
+                                   usage='python3 %(prog)s [dns-queries.txt] [cache-entires.txt]')
     args.add_argument("dns")
+    args.add_argument("cache")
 
     # Parse the arguments
     args = args.parse_args()
